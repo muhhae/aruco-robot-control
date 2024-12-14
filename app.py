@@ -9,6 +9,8 @@ left = {
     "pwm2" : 13,
     "enb1" : 5,
     "enb2" : 6,
+    "enc1" : 23,
+    "enc2" : 24,
 }
 
 right = {
@@ -16,6 +18,8 @@ right = {
     "pwm2" : 19,
     "enb1" : 20,
     "enb2" : 21,
+    "enc1" : 5,
+    "enc2" : 6,
 }
 
 robot = RobotControl(left, right)
