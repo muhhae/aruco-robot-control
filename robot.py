@@ -28,7 +28,7 @@ class RobotControl:
         self.left_speed = 0
         self.right_speed = 0
 
-    def robot_forward(self, speed=20):
+    def robot_forward(self, mode: str, speed=20):
         self.right_speed = speed * self.left_right_ratio
         self.left_speed = speed
         self.left_wheel.move_reverse(speed=self.left_speed)
@@ -72,13 +72,16 @@ class RobotControl:
         self.left_speed = speed
         self.left_wheel.move_backward(speed=self.left_speed)
 
-    def robot_right_forward(self, speed=25):
+    def robot_right_forward(self, speed=25):    
         self.right_speed = speed
         self.right_wheel.move_forward(speed=self.right_speed)
 
     def robot_right_backward(self, speed=25):
         self.right_speed = speed
         self.right_wheel.move_backward(speed=self.right_speed)
+
+    # def corection_left(self, offset):
+    #     self
 
     def robot_stop(self):
         self.left_speed = 0
