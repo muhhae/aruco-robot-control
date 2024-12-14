@@ -40,25 +40,25 @@ def move_backward_a_moment(second: int, speed: float):
     time.sleep(second)
     robot.robot_stop()
 
-@app.get("/turn-left/{speed}")
-def turn_left(speed: float):
-    robot.robot_turn_left(speed)
+# @app.get("/turn-left/{speed}")
+# def turn_left(speed: float):
+#     robot.robot_turn_left(speed)
 
-@app.get("/turn-left-a-moment/{second}/{speed}")
-def turn_left_a_moment(second:int, speed:float):
-    robot.robot_turn_left(speed)
-    time.sleep(second)
-    robot.robot_stop()
+# @app.get("/turn-left-a-moment/{second}/{speed}")
+# def turn_left_a_moment(second:int, speed:float):
+#     robot.robot_turn_left(speed)
+#     time.sleep(second)
+#     robot.robot_stop()
 
-@app.get("/turn-right/{speed}")
-def turn_right(speed: float):
-    robot.robot_turn_right(speed)
+# @app.get("/turn-right/{speed}")
+# def turn_right(speed: float):
+#     robot.robot_turn_right(speed)
 
-@app.get("/turn-right-a-moment/{second}/{speed}")
-def turn_right_a_moment(second:int, speed:float):
-    robot.robot_turn_right(speed)
-    time.sleep(second)
-    robot.robot_stop()
+# @app.get("/turn-right-a-moment/{second}/{speed}")
+# def turn_right_a_moment(second:int, speed:float):
+#     robot.robot_turn_right(speed)
+#     time.sleep(second)
+#     robot.robot_stop()
 
 @app.get("/pivot-left/{speed}")
 def pivot_left(speed: float):

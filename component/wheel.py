@@ -1,5 +1,4 @@
 import RPi.GPIO as GPIO
-from time import sleep
 
 class MotorDriver:
     def __init__(self, pwm1, pwm2, enb1, enb2, freq = 100):
