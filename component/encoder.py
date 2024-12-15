@@ -6,7 +6,7 @@ class Encoder:
         self.leftPin = leftPin
         self.rightPin = rightPin
         self.value = 0
-        self.state = '00'
+        self.state = '00'   
         self.direction = None
         self.callback = callback
         GPIO.setup(self.leftPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)

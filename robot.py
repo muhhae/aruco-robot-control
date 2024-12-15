@@ -35,78 +35,30 @@ class RobotControl:
         self.right_wheel = MotorDriver(
             right["pwm1"], right["pwm2"]
         )
-        self.left_encoder = Encoder(left["enc1"], left["enc2"])
-        self.right_encoder = Encoder(right["enc1"], right["enc2"])
         self.left_speed = 0
         self.right_speed = 0
-        self.state = "stopped"  # Possible states: "stopped", "forward", "backward"
-        self.correction_thread_running = False
-        self.correction_gain = 0.02
-        self.lock = Lock()
-        
-    def _periodic_correction(self):
-        def periodic_correction():
-            while True:
-                with self.lock:
-                    if self.state == "stopped":
-                        self.correction_thread_running = False
-                        break
-                    self.corrrection_algorithm()
-                time.sleep(0.3)
-
-        if not self.correction_thread_running:
-            self.correction_thread_running = True
-            thread = threading.Thread(target=periodic_correction, daemon=True)
-            thread.start()
-
-    def corrrection_algorithm(self):
-        left_ticks = self.left_encoder.getValue()
-        right_ticks = self.right_encoder.getValue()
-
-        error = left_ticks - right_ticks
-
-        if self.state == "forward":
-            self.left_speed -= error * self.correction_gain
-            self.right_speed += error * self.correction_gain
-            self.move_forward()
-        elif self.state == "backward":
-            self.left_speed -= error * self.correction_gain
-            self.right_speed += error * self.correction_gain
-            self.move_backward()
 
     def set_speed(self, left_speed, right_speed):
         self.left_speed = left_speed
         self.right_speed = right_speed
 
     def move_forward(self):
-        with self.lock:
-            self.state = "forward"
-        self._periodic_correction()
         self.left_wheel.move_forward(speed=self.left_speed)
         self.right_wheel.move_forward(speed=self.right_speed)
 
     def move_backward(self):
-        with self.lock:
-            self.state = "backward"
-        self._periodic_correction()
-        self.left_wheel.move_backward(speed=self.left_speed)
-        self.right_wheel.move_backward(speed=self.right_speed)
+        self.left_wheel.move_reverse(speed=self.left_speed)
+        self.right_wheel.move_reverse(speed=self.right_speed)
 
     def pivot_right(self):
-        with self.lock:
-            self.state = "pivot"
         self.left_wheel.move_reverse(speed=self.left_speed)
         self.right_wheel.move_reverse(speed=self.right_speed)
 
     def pivot_left(self):
-        with self.lock:
-            self.state = "pivot"
         self.left_wheel.move_forward(speed=self.left_speed)
         self.right_wheel.move_forward(speed=self.right_speed)
 
     def stop(self):
-        with self.lock:
-            self.state = "stopped"
         self.left_speed = 0
         self.right_speed = 0
         self.left_wheel.stop_moving()
