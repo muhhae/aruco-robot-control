@@ -132,12 +132,7 @@ class RobotControl:
     def robot_pivot_left(self, speed=25):
         self.set_speed(speed, speed * self.left_right_ratio)
         self.pivot_left()
-
-
-
-
-
-
+        
     def left_wheel_forward(self):
         self.left_wheel.move_forward(speed=self.left_speed)
 

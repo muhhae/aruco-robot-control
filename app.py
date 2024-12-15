@@ -74,6 +74,12 @@ def pivot_left_a_moment(second: int, speed: float):
     time.sleep(second)
     robot.robot_stop()
 
+@app.get("/pivot-left-a-moment/{second}/{speed}")
+def pivot_left_a_moment(second: int, speed: float):
+    robot.robot_pivot_left(speed)
+    time.sleep(second)
+    robot.robot_stop()
+
 @app.get("/pivot-right/{speed}")
 def pivot_right(speed: float):
     robot.robot_pivot_right(speed)
