@@ -41,7 +41,7 @@ class RobotControl:
         self.right_speed = 0
         self.state = "stopped"  # Possible states: "stopped", "forward", "backward"
         self.correction_thread_running = False
-        self.correction_gain = 0.1
+        self.correction_gain = 0.02
         self.lock = Lock()
         
     def _periodic_correction(self):
@@ -93,10 +93,14 @@ class RobotControl:
         self.right_wheel.move_backward(speed=self.right_speed)
 
     def pivot_right(self):
+        with self.lock:
+            self.state = "pivot"
         self.left_wheel.move_reverse(speed=self.left_speed)
         self.right_wheel.move_reverse(speed=self.right_speed)
 
     def pivot_left(self):
+        with self.lock:
+            self.state = "pivot"
         self.left_wheel.move_forward(speed=self.left_speed)
         self.right_wheel.move_forward(speed=self.right_speed)
 
