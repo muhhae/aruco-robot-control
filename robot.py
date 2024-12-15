@@ -30,10 +30,10 @@ class RobotControl:
 
     def __init__(self, left, right):
         self.left_wheel = MotorDriver(
-            left["pwm1"], left["pwm2"], left["enb1"], left["enb2"]
+            left["pwm1"], left["pwm2"]
         )
         self.right_wheel = MotorDriver(
-            right["pwm1"], right["pwm2"], right["enb1"], right["enb2"]
+            right["pwm1"], right["pwm2"]
         )
         self.left_encoder = Encoder(left["enc1"], left["enc2"])
         self.right_encoder = Encoder(right["enc1"], right["enc2"])
