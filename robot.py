@@ -1,8 +1,4 @@
 from .component.wheel import MotorDriver
-from .component.encoder import Encoder
-import time
-import threading
-from threading import Lock
 
 class RobotControl:
     """
@@ -43,11 +39,11 @@ class RobotControl:
         self.right_speed = right_speed
 
     def move_forward(self):
-        self.left_wheel.move_forward(speed=self.left_speed)
+        self.left_wheel.move_reverse(speed=self.left_speed)
         self.right_wheel.move_forward(speed=self.right_speed)
 
     def move_backward(self):
-        self.left_wheel.move_reverse(speed=self.left_speed)
+        self.left_wheel.move_forward(speed=self.left_speed)
         self.right_wheel.move_reverse(speed=self.right_speed)
 
     def pivot_right(self):
